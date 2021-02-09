@@ -2,19 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Pacient;
+use App\Models\Patient;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Provider\pt_BR as Faker;
+use Faker\Provider\pt_BR\Person as BR;
 
 
-class PacientFactory extends Factory
+class PatientFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Pacient::class;
+    protected $model = Patient::class;
 
     /**
      * Define the model's default state.
@@ -23,12 +23,13 @@ class PacientFactory extends Factory
      */
     public function definition()
     {
+        $this->faker->addProvider(new BR($this->faker));
         $gender = $this->faker->randomElement(['male', 'female']);
 
         return [
             'name' => $this->faker->name($gender),
             'gender' => $gender,
-            'dateBirt' => date($format = 'Y-m-d', $max = 'now'),
+            'dateBirt' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
             'document' => $this->faker->rg(false)
         ];
     }

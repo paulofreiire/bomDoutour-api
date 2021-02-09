@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pacient extends Model
+class Patient extends Model
 {
     use HasFactory;
-    protected $table = 'pacients';
+    protected $table = 'patients';
 
     protected $fillable = [
         'name',
@@ -16,4 +16,9 @@ class Pacient extends Model
         'dateBirt',
         'document'
     ];
+
+    public function consultation()
+    {
+        return $this->hasMany(Consultation::class, 'patient_id', 'id');
+    }
 }

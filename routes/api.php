@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\PacientController;
+use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/pacients', [PacientController::class, 'store']);
-Route::get('/pacients', [PacientController::class, 'index']);
+Route::post('/patients', [PatientController::class, 'store']);
+Route::get('/patients', [PatientController::class, 'index']);
+
+Route::get('/consultations', [ConsultationController::class, 'index']);
+Route::post('/consultations', [ConsultationController::class, 'store']);
+Route::get('/consultation/{id}', [ConsultationController::class, 'show']);
